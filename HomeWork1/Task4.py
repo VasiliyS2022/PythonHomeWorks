@@ -24,9 +24,24 @@ def QuartNum(num):
         b = 0
     return a, b
 
+def Range(q):
+    if q == '1': # a > 0 and b > 0
+        d = 'a > 0 и b > 0'
+    elif q == '2': # a < 0 and b > 0
+        d = 'a < 0 и b > 0'
+    elif q == '3': # a < 0 and b < 0
+        d = 'a < 0 и b < 0'
+    elif q == '4': # a > 0 and b < 0
+        d = 'a > 0 и b < 0'
+    else:
+        d = 0
+    return d
+
 numQuart = input('Введите номер четверти от 1 до 4: ')
 
-quart = QuartNum(numQuart)
-print(f'В четверти {numQuart} значения точек A и B могут быть равны {quart}')
+points = QuartNum(numQuart)
+quart = Range(numQuart)
+
+print(f'В четверти {numQuart} диапазон равен {quart}, значения точек A и B могут быть равны {points}')
 
 ##########################################################################################################
