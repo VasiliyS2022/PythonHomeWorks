@@ -20,7 +20,7 @@ def MoveHuman(count):
         maxMove = count
     move = int(input(f'Вы можете взять не более {maxMove} конфет: '))
     
-    if move <= maxMove:
+    if 0 < move <= maxMove:
         count -= move
         print(f'На столе осталось {count} конфет')
     else:
