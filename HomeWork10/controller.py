@@ -16,7 +16,7 @@ def parsing_values(values):
         action.append(int(''.join(sign)))
     return action
 
-def calculate(equation):                                       
+def counting(equation):                                       
     res = 0
     if len(equation) == 1:
         return equation[0]
@@ -42,15 +42,15 @@ def calculate(equation):
                 equation = equation[:x - 1] + [res] + equation[x + 2:]
     return res
 
-def solution_equation(lst):                                     
+def upshot(lst):                                     
     flag = 1
     while flag == 1:
         if ')' in lst:
             for i in range(lst.index(')'), -1, -1):
                 if lst[i] == '(':
                     ix = lst.index(')')
-                    elem = calculate(lst[i + 1:ix])
+                    elem = counting(lst[i + 1:ix])
                     lst = lst[:i] + [elem] + lst[ix + 1:]
         elif ')' not in lst:
             flag = 0
-    return calculate(lst)
+    return counting(lst)

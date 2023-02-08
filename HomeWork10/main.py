@@ -1,4 +1,4 @@
-from controller import parsing_values, solution_equation
+from controller import parsing_values, upshot
 from telegram import Bot, InlineKeyboardButton,  InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler, ConversationHandler, CallbackQueryHandler
 from logger import get_id, get_name, get_input_values, get_result, log_save, get_time
@@ -22,11 +22,11 @@ def start(update, context):
     bot.send_message(update.effective_chat.id, 'Используйте кнопку END для отключения', reply_markup = reply_markup)
     return start_calc
 
-def receiving_data(update, context):
+def taking_values(update, context):
     values = update.message.text
     get_input_values(values)  
     list_data = parsing_values(values) 
-    result = solution_equation(list_data)  
+    result = upshot(list_data)  
     get_result(result) 
     log_save()  
     context.bot.send_message(update.effective_chat.id, f'Ваш ответ: {result}')
@@ -36,12 +36,12 @@ def end(update, context):
     return ConversationHandler.END
 
 start_handler = CommandHandler('start', start)
-receiving_data_handler = MessageHandler(Filters.text & (~Filters.command), receiving_data)
-mes_data_handler = CallbackQueryHandler(end)
+receiving_data_handler = MessageHandler(Filters.text & (~Filters.command), taking_values)
+end_handler = CallbackQueryHandler(end)
 
 conv_handler = ConversationHandler(entry_points=[start_handler],
                                     states={start_calc: [receiving_data_handler]},
-                                    fallbacks=[mes_data_handler])
+                                    fallbacks=[end_handler])
 
 dispatcher.add_handler(conv_handler)
 
