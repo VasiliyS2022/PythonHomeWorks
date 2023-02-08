@@ -12,7 +12,8 @@ start_calc = 0
 
 def start(update, context):
     context.bot.send_message(update.effective_chat.id, f'Здравствуйте, {update.effective_user.first_name}! Это программа "Калькулятор положительных чисел"')
-    context.bot.send_message(update.effective_chat.id, 'Используйте знаки: +, -, *, /, (, ). Учитывается приоритет действий')
+    context.bot.send_message(update.effective_chat.id, 'Используйте знаки: +, -, *, /, (, ). Вводите знаки и цифры без пробелов.\
+Учитывается приоритет действий')
     get_id(update.effective_chat.id)
     get_name(update.effective_user.first_name)
     get_time(datetime.datetime.now())
